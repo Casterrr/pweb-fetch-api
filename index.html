@@ -11,58 +11,7 @@
 
     <button onclick="criaTabela()">Cria Tabela</button>
 
-    <script>
-
-        async function getData() {
-            try {
-                let response = await fetch('https://dados.al.gov.br/catalogo/api/3/action/datastore_search?resource_id=b38d7939-a946-45a8-a46f-640dc38e7fce&limit=5')
-
-                const data = await response.json();
-
-                const records = data.result.records;
-
-                return records;
-                
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        
-        async function criaTabela() {
-            // Criando a tabela e os elementos associados
-            let table = document.createElement('table');
-            let headerRow = document.createElement('tr');
-            let headers = ['Rede', 'Tipo', 'Município', 'Ano'];
-
-            headers.forEach(headerText => {
-                let header = document.createElement('th');
-                header.textContent = headerText;
-                headerRow.appendChild(header);
-            });
-
-            table.appendChild(headerRow);
-
-            // Adicionando linhas de dados à tabela
-
-            const records = await getData();
-
-            const keys = ['ensino_rede', 'ensino_tipo', 'no_mun', 'ano']
-
-            records.forEach(rowData => {
-                let row = document.createElement('tr');
-
-                keys.forEach((key) => {
-                    let cell = document.createElement('td');
-                    cell.textContent = rowData[key];
-                    row.appendChild(cell);
-                })
-                table.appendChild(row);
-            });
-
-            // Adicionando a tabela ao corpo do documento
-            document.body.appendChild(table)
-        }
-    </script>
+    <script src="index.js"></script>
 </body>
 
 </html>
